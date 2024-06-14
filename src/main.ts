@@ -29,6 +29,14 @@ for (count; count < 1000; count++) {
   heap.insert(number6);
   heap.insert(number7);
   heap.insert(number8);
+  heap.remove();
+  heap.remove();
+  heap.remove();
+  heap.remove();
+  heap.remove();
+  heap.remove();
+  heap.remove();
+  heap.remove();
 
   if (!isMaxHeap(heap.items)) console.log("error at", myArray, heap.items);
 }

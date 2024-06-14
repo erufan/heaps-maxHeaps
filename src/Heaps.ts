@@ -6,30 +6,9 @@ class Heaps {
     this.bubbleUp();
   }
   public remove() {
-    let index = 0;
-    this.items[index] = this.items[this.items.length - 1];
+    this.items[0] = this.items[this.items.length - 1];
     this.items.pop();
-
-    while (index < this.items.length) {
-      let leftIndex = index * 2 + 1;
-      let rightIndex = index * 2 + 2;
-      let largerIndex = 0;
-
-      if (
-        rightIndex < this.items.length &&
-        this.items[rightIndex] > this.items[leftIndex]
-      ) {
-        largerIndex = rightIndex;
-      } else if (leftIndex < this.items.length) {
-        largerIndex = leftIndex;
-      }
-      if (largerIndex === 0 || this.items[index] >= this.items[largerIndex]) {
-        break;
-      }
-
-      this.swap(index, largerIndex);
-      index = largerIndex;
-    }
+    this.bubbleDown();
   }
 
   private bubbleUp() {
@@ -42,6 +21,28 @@ class Heaps {
       index = this.parentIndex(index);
     }
   }
+  private bubbleDown() {
+    let index = 0;
+    while (index < this.items.length) {
+      let largerIndex = 0;
+
+      if (
+        this.haveRightChild(index) &&
+        this.rightChild(index) > this.leftChild(index)
+      ) {
+        largerIndex = this.rightIndex(index);
+      } else if (this.haveLeftChild(index)) {
+        largerIndex = this.leftIndex(index);
+      }
+      if (largerIndex === 0 || this.items[index] >= this.items[largerIndex]) {
+        break;
+      }
+
+      this.swap(index, largerIndex);
+      index = largerIndex;
+    }
+  }
+
   private parentIndex(index: number) {
     return Math.floor((index - 1) / 2);
   }
@@ -51,6 +52,25 @@ class Heaps {
       this.items[index1] = this.items[index2];
       this.items[index2] = temp;
     }
+  }
+
+  private leftIndex(index: number) {
+    return index * 2 + 1;
+  }
+  private rightIndex(index: number) {
+    return index * 2 + 2;
+  }
+  private rightChild(index: number) {
+    return this.items[this.rightIndex(index)];
+  }
+  private leftChild(index: number) {
+    return this.items[this.leftIndex(index)];
+  }
+  private haveLeftChild(index: number) {
+    return this.leftIndex(index) < this.items.length;
+  }
+  private haveRightChild(index: number) {
+    return this.rightIndex(index) < this.items.length;
   }
 }
 
