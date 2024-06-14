@@ -61,5 +61,3 @@ function isMaxHeap(arr: number[], index: number = 0): boolean {
     isMaxHeap(arr, rightChildIndex)
   );
 }
-
-// Example usage:

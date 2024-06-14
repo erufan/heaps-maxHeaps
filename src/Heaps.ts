@@ -17,7 +17,7 @@ class Heaps {
       index > 0 &&
       this.items[index] > this.items[this.parentIndex(index)]
     ) {
-      this.swap(index, this.parentIndex(index));
+      this.swap(this.items, index, this.parentIndex(index));
       index = this.parentIndex(index);
     }
   }
@@ -38,7 +38,7 @@ class Heaps {
         break;
       }
 
-      this.swap(index, largerIndex);
+      this.swap(this.items, index, largerIndex);
       index = largerIndex;
     }
   }
@@ -46,11 +46,11 @@ class Heaps {
   private parentIndex(index: number) {
     return Math.floor((index - 1) / 2);
   }
-  private swap(index1: number, index2: number) {
-    if (this.items[index1] !== this.items[index2]) {
-      let temp = this.items[index1];
-      this.items[index1] = this.items[index2];
-      this.items[index2] = temp;
+  private swap(myArray: number[], index1: number, index2: number) {
+    if (myArray[index1] !== myArray[index2]) {
+      let temp = myArray[index1];
+      myArray[index1] = myArray[index2];
+      myArray[index2] = temp;
     }
   }
 
